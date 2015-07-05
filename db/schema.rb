@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150701152907) do
+ActiveRecord::Schema.define(version: 20150705150119) do
 
   create_table "doings", force: :cascade do |t|
     t.string   "repo"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20150701152907) do
     t.integer  "user_id"
   end
 
+  add_index "doings", ["user_id"], name: "index_doings_on_user_id"
+
   create_table "organizations", force: :cascade do |t|
     t.string   "name"
     t.string   "token"
@@ -28,11 +30,18 @@ ActiveRecord::Schema.define(version: 20150701152907) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "organizations", ["token"], name: "index_organizations_on_token"
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.integer  "organization_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "recent_repo"
+    t.string   "recent_branch"
+    t.datetime "recent_did_at"
   end
+
+  add_index "users", ["organization_id"], name: "index_users_on_organization_id"
 
 end

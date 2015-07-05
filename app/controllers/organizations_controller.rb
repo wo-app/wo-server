@@ -8,10 +8,4 @@ class OrganizationsController < ApplicationController
       render json: @organization.errors, status: :unprocessable_entity
     end
   end
-
-  private
-
-  def set_organization
-    @organization = Organization.find(params[:id])
-  end
 end

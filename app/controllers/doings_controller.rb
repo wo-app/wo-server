@@ -1,12 +1,6 @@
 class DoingsController < ApplicationController
   before_action :set_organization
 
-  def index
-    @doings = @organization.doings.recent
-
-    render json: @doings
-  end
-
   def create
     @doing = Doing.new(doing_params)
     @doing.user = @organization.users.find_or_create_by(user_params)
